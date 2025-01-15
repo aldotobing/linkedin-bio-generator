@@ -1,5 +1,12 @@
-import { Sparkles } from 'lucide-react'
-import { BioGenerator } from "./components/bio-generator"
+import { Sparkles } from "lucide-react";
+import { BioGenerator } from "./components/bio-generator";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "LinkedIn Bio Generator",
+  description:
+    "Transform your professional story into an engaging LinkedIn bio",
+};
 
 export default function Page() {
   return (
@@ -14,12 +21,12 @@ export default function Page() {
             Craft Your Perfect LinkedIn Bio
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
-            Transform your professional story into an engaging LinkedIn bio that captures attention and showcases your unique value.
+            Transform your professional story into an engaging LinkedIn bio that
+            captures attention and showcases your unique value.
           </p>
         </div>
         <BioGenerator />
       </div>
     </div>
-  )
+  );
 }
-
