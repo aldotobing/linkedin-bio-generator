@@ -55,6 +55,16 @@ npm run build
 yarn build
 ```
 
+### Exporting Static Files
+
+To export the project as static files for GitHub Pages, run:
+
+```bash
+npm run export
+# or
+yarn export
+```
+
 ### Environment Variables
 
 Create a `.env.local` file in the root directory and add the following environment variables:
@@ -78,3 +88,7 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License.
+
+## Deployment
+
+This project is deployed to GitHub Pages using GitHub Actions. The deployment workflow is defined in `.github/workflows/deploy.yml`.
