@@ -21,7 +21,7 @@ This project is a LinkedIn Bio Generator built with Next.js and TypeScript. It a
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/linkedin-bio-generator.git
+   git clone https://github.com/aldotobing/linkedin-bio-generator.git
    cd linkedin-bio-generator
    ```
 
