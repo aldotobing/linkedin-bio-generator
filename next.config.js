@@ -1,6 +1,5 @@
 module.exports = {
-  // ...existing code...
+  output: "export",
   basePath: "/linkedin-bio-generator",
-  assetPrefix: "/linkedin-bio-generator/",
-  // ...existing code...
+  assetPrefix: "/linkedin-bio-generator",
 };
