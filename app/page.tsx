@@ -25,9 +25,7 @@ export default function Page() {
           <div className="flex justify-center items-center gap-2 px-6 py-3 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 mb-8 max-w-fit mx-auto">
             <div className="flex items-center gap-1">
               <Sparkles className="w-4 h-4" />
-              <span className="text-base">
-                <b>Powered by Llama3.3 70B (Instruct FP8 Fast)</b>
-              </span>
+              <span className="text-xl">Powered by Llama3.3-70B</span>
             </div>
             <div className="relative">
               <Image
