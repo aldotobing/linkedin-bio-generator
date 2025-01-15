@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle2, Sparkles, Copy } from "lucide-react";
 import { toast } from "react-hot-toast";
+import { marked } from "marked"; // Import marked
 
 const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL || "";
 
@@ -113,6 +114,9 @@ Follow these guidelines:
     }, 1500);
   }
 
+  // Parse the markdown into HTML
+  const formattedBio = marked(generatedBio);
+
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
       <Card className="p-4 sm:p-6 md:p-8 shadow-lg border-2 border-indigo-500 bg-gradient-to-br from-indigo-100 to-white">
@@ -210,11 +214,17 @@ Follow these guidelines:
               <Label className="text-base sm:text-lg font-semibold text-green-700">
                 🚀 Your Generated Bio
               </Label>
-              <Textarea
-                className="mt-2 sm:mt-4 min-h-[150px] sm:min-h-[200px] border-2 border-green-300 focus:ring-4 focus:ring-green-200 text-sm sm:text-base"
-                value={generatedBio}
-                readOnly
-              />
+
+              {/* Render generatedBio with preserved line breaks using CSS */}
+              <div
+                className="mt-2 sm:mt-4 min-h-[150px] sm:min-h-[200px] focus:ring-4 focus:ring-green-200 text-sm sm:text-base"
+                style={{
+                  whiteSpace: "pre-line", // Ensures that line breaks are preserved
+                }}
+              >
+                {generatedBio}
+              </div>
+
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -249,5 +259,3 @@ Follow these guidelines:
     </div>
   );
 }
-
-export default BioGenerator;
