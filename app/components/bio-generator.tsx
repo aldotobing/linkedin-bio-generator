@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle2, Sparkles, Copy } from "lucide-react";
 import { toast } from "react-hot-toast";
 
-const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL || "";
+const API_ENDPOINT = process.env.API_URL || "";
 
 const vibeOptions = [
   {
