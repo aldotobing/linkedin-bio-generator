@@ -41,19 +41,41 @@ export function BioGenerator() {
     setGeneratedBio("");
 
     const prompt = `Create a compelling LinkedIn bio for a ${role}.
-    Additional Context: ${additionalContext || "N/A"}
-    Follow these guidelines:
-    1. Style: Make it ${vibe}, engaging, and authentic.
-    2. Structure:
-      - Start with a powerful hook.
-      - Highlight expertise, impact, and measurable achievements.
-      - Include relevant technical skills.
-      - Showcase passion and unique value proposition.
-      - End with a strong call to action or future aspirations.
-    3. Length: Keep it concise (2-3 short paragraphs).
-    4. Tone: Confident but approachable.
-    ${language === "id" ? "5. Make it in proper Indonesian language." : ""}
-    6. Use first-person narrative.`;
+${additionalContext ? `Additional Context: ${additionalContext}` : ""}
+
+Follow these guidelines:
+1. Style: Make it ${vibe}, engaging, and authentic.
+
+2. Structure:
+   - Hook: Start with an attention-grabbing opener that defines your professional identity
+   - Impact: Highlight 2-3 specific achievements with measurable results (numbers preferred)
+   - Expertise: Mention your core technical skills and specializations
+   - Value: Describe your unique approach or methodology that sets you apart
+   - Vision: End with a clear purpose or call to action
+
+3. Must Include:
+   - At least one quantifiable achievement
+   - Current role focus and expertise level
+   - Key technical skills relevant to ${role}
+   - Professional passion or driving motivation
+
+4. Format:
+   - Length: 2-3 concise paragraphs (250-400 characters)
+   - Tone: Confident but approachable
+   - Voice: First-person narrative
+   ${
+     language === "id"
+       ? "Make it in Professional Indonesian language (Bahasa baku)"
+       : ""
+   }
+
+5. Avoid:
+   - Generic buzzwords and clichés
+   - Personal information unrelated to career
+   - Lengthy skill lists
+   - Overly formal or casual language
+   - Translation notes or word/character counts
+   - Any explanatory notes at the bottom`;
 
     try {
       const response = await fetch(API_ENDPOINT, {
