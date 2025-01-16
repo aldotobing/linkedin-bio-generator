@@ -291,7 +291,7 @@ Follow these guidelines:
             <Label className="text-base sm:text-lg font-semibold text-indigo-700">
               🎨 Choose your vibe
             </Label>
-            <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {vibeOptions.map((vibeOption) => (
                 <Card
                   key={vibeOption.name.toLowerCase()}
