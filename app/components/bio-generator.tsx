@@ -85,6 +85,30 @@ const vibeOptions = [
     name: "Leadership",
     description: "Emphasizes vision and team management experience",
   },
+  {
+    name: "Analytical",
+    description: "Focused on data-driven insights and logical reasoning",
+  },
+  {
+    name: "Empathetic",
+    description: "Highlights emotional intelligence and interpersonal skills",
+  },
+  {
+    name: "Innovative",
+    description: "Showcases creativity and forward-thinking approaches",
+  },
+  {
+    name: "Motivational",
+    description: "Inspires and encourages others, great for coaching roles",
+  },
+  {
+    name: "Adventurous",
+    description: "Bold and daring, perfect for roles that involve risk-taking",
+  },
+  {
+    name: "Collaborative",
+    description: "Emphasizes teamwork and collective success",
+  },
 ];
 
 export function BioGenerator() {
@@ -335,7 +359,7 @@ export function BioGenerator() {
             <Label className="text-base sm:text-lg font-semibold text-indigo-700">
               🎨 Choose your vibe
             </Label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {vibeOptions.map((vibeOption) => (
                 <Card
                   key={vibeOption.name.toLowerCase()}
@@ -347,10 +371,13 @@ export function BioGenerator() {
                   onClick={() => setVibe(vibeOption.name.toLowerCase())}
                 >
                   <div className="flex flex-col h-full">
+                    {/* Title only, visible for all screen sizes */}
                     <h3 className="font-semibold text-sm sm:text-base text-indigo-700 mb-1">
                       {vibeOption.name}
                     </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">
+
+                    {/* Description hidden on small screens */}
+                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-2 hidden sm:block mb-2">
                       {vibeOption.description}
                     </p>
                   </div>
