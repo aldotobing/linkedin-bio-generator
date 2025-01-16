@@ -54,6 +54,7 @@ Follow these guidelines:
    - Vision: End with a clear purpose or call to action
 
 3. Must Include:
+   - At least one quantifiable achievement
    - Current role focus and expertise level
    - Key technical skills relevant to ${role}
    - Professional passion or driving motivation
