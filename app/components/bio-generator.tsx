@@ -44,7 +44,7 @@ export function BioGenerator() {
 ${additionalContext ? `Additional Context: ${additionalContext}` : ""}
 
 Follow these guidelines:
-1. Style: Make it following ${vibe} vibe of the person, engaging, and authentic.
+1. Style: Make it with ${vibe} vibe, engaging, and authentic.
 
 2. Structure:
    - Hook: Start with an attention-grabbing opener that defines your professional identity
