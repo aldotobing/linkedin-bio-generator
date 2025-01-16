@@ -48,7 +48,7 @@ Follow these guidelines:
 
 2. Structure:
    - Hook: Start with an attention-grabbing opener that defines your professional identity
-   - Impact: Highlight 2-3 specific achievements with measurable results (numbers preferred)
+   - Impact: Highlight 2-3 specific achievements with measurable results with kind of methodology used (numbers preferred)
    - Expertise: Mention your core technical skills and specializations
    - Value: Describe your unique approach or methodology that sets you apart
    - Vision: End with a clear purpose or call to action
