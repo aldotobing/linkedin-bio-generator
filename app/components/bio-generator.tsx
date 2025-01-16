@@ -54,7 +54,6 @@ Follow these guidelines:
    - Vision: End with a clear purpose or call to action
 
 3. Must Include:
-   - At least one quantifiable achievement
    - Current role focus and expertise level
    - Key technical skills relevant to ${role}
    - Professional passion or driving motivation
@@ -96,7 +95,7 @@ Follow these guidelines:
       );
       toast.success("Your bio is ready! ✨");
     } catch (error) {
-      console.error("Error:", error);
+      //console.error("Error:", error);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setIsGenerating(false);
