@@ -101,21 +101,43 @@ Follow these guidelines:
     }
   }
 
-  async function handleCopy() {
-    setIsCopying(true);
-    try {
-      await navigator.clipboard.writeText(generatedBio);
-      toast.success("Bio copied to clipboard! ✨");
-    } catch (error) {
-      toast.error("Failed to copy. Please try again.");
+  function handleCopy() {
+    if (navigator.clipboard && window.ClipboardItem) {
+      Promise.resolve(formattedBio).then((resolvedBio) => {
+        const blob = new Blob([resolvedBio], { type: "text/html" });
+        const clipboardItem = new ClipboardItem({ "text/html": blob });
+        navigator.clipboard.write([clipboardItem]);
+      });
+    } else {
+      // Fallback kalau browser nggak support copy HTML
+      const tempElement = document.createElement("div");
+      Promise.resolve(formattedBio).then((resolvedBio) => {
+        tempElement.innerHTML = resolvedBio;
+      });
+      document.body.appendChild(tempElement);
+      const range = document.createRange();
+      range.selectNode(tempElement);
+      let selection = window.getSelection();
+      if (selection) {
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      document.execCommand("copy");
+      selection = window.getSelection();
+      if (selection) {
+        selection.removeAllRanges();
+      }
+      document.body.removeChild(tempElement);
     }
-    setTimeout(() => {
-      setIsCopying(false);
-    }, 1500);
+    setIsCopying(true);
+    setTimeout(() => setIsCopying(false), 2000);
   }
 
+  function addLineBreaksToBold(text: string) {
+    return text.replace(/\*\*(.*?)\*\*:/g, "**$1**:<br>");
+  }
   // Parse the markdown into HTML
-  const formattedBio = marked(generatedBio);
+  const formattedBio = marked(addLineBreaksToBold(generatedBio));
 
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
@@ -222,7 +244,10 @@ Follow these guidelines:
                   whiteSpace: "pre-line", // Ensures that line breaks are preserved
                 }}
               >
-                {generatedBio}
+                <div
+                  className="mt-2 sm:mt-4 min-h-[150px] sm:min-h-[200px] prose prose-sm sm:prose-base max-w-none"
+                  dangerouslySetInnerHTML={{ __html: formattedBio }}
+                />
               </div>
 
               <motion.div

@@ -22,22 +22,29 @@ export default function Page() {
             captures attention and showcases your unique value.
           </p>
 
-          <div className="flex justify-center items-center gap-2 px-6 py-3 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 mb-8 max-w-fit mx-auto">
-            <div className="flex items-center gap-1">
-              <Sparkles className="w-4 h-4" />
-              <span className="text-xl">Powered by Llama3.3-70B</span>
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-2 px-6 py-2.5 mb-0 rounded-full bg-purple-100 dark:bg-purple-900/30">
+              <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-300" />
+              <span className="text-lg text-purple-600 dark:text-purple-300">
+                Powered by Llama-3.3 70B
+              </span>
             </div>
-            <div className="relative">
+
+            <div className="flex items-center justify-center gap-4">
               <Image
                 src="/linkedin-bio-generator/assets/img/meta.png"
                 alt="Meta"
-                width={50}
-                height={50}
-                className="transition-transform hover:scale-110"
+                width={80}
+                height={40}
+                className="object-contain"
               />
-              <span className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs py-1 px-2 rounded">
-                Meta
-              </span>
+              <Image
+                src="/linkedin-bio-generator/assets/img/cloudflare.png"
+                alt="Cloudflare"
+                width={69}
+                height={40}
+                className="object-contain"
+              />
             </div>
           </div>
         </div>
