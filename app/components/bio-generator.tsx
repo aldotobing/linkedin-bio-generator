@@ -88,7 +88,7 @@ Follow these guidelines:
           messages: [{ role: "user", content: prompt }],
         }),
       });
-      console.log("Prompt", prompt);
+      //console.log("Prompt", prompt);
 
       const data = await response.json();
       setGeneratedBio(
