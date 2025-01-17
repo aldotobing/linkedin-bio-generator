@@ -88,7 +88,7 @@ Follow these guidelines:
           messages: [{ role: "user", content: prompt }],
         }),
       });
-      //console.log("Prompt", prompt);
+      console.log("Prompt", prompt);
 
       const data = await response.json();
       setGeneratedBio(
@@ -236,6 +236,15 @@ Follow these guidelines:
     );
   };
 
+  const handleCardInteraction = (vibeOption: {
+    name: string;
+    description: string;
+  }) => {
+    setSelectedVibe(vibeOption.name);
+    setVibe(vibeOption.name);
+    setActiveHint(vibeOption.name);
+  };
+
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
       <Card className="p-4 sm:p-6 md:p-8 shadow-lg border-2 border-indigo-100 bg-gradient-to-br from-indigo-100 to-white">
@@ -301,10 +310,7 @@ Follow these guidelines:
                       ? "border-2 border-indigo-500 bg-indigo-50"
                       : "border border-gray-200 hover:border-indigo-300"
                   }`}
-                  onClick={() => {
-                    setSelectedVibe(vibeOption.name);
-                    setVibe(vibeOption.name);
-                  }}
+                  onClick={() => handleCardInteraction(vibeOption)}
                   onMouseEnter={() => setActiveHint(vibeOption.name)}
                   onMouseLeave={() => setActiveHint(null)}
                 >
@@ -313,10 +319,6 @@ Follow these guidelines:
                       <h3 className="font-semibold text-sm sm:text-base text-indigo-700 mb-1">
                         {vibeOption.name}
                       </h3>
-                      {/* <Info
-                        size={16}
-                        className="text-gray-400 group-hover:text-indigo-500 transition-colors"
-                      /> */}
                     </div>
                     <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">
                       {vibeOption.description}
