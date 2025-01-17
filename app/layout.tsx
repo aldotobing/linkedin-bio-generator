@@ -1,6 +1,7 @@
 import "./globals.css";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "LinkedIn Bio Generator",
   description:
     "Transform your professional story into an engaging LinkedIn bio",

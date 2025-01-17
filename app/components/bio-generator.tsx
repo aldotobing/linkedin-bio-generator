@@ -50,7 +50,7 @@ Follow these guidelines:
 
 2. Structure:
    - Hook: Start with an attention-grabbing opener that defines your professional identity
-   - Impact: Highlight 2-3 specific achievements
+   - Impact: Highlight 2-3 specific achievements and kind of problems you solve and for whom with what results and methods
    - Expertise: Mention your core technical skills and specializations
    - Value: Describe your unique approach or methodology that sets you apart
    - Vision: End with a clear purpose or call to action
@@ -88,7 +88,7 @@ Follow these guidelines:
           messages: [{ role: "user", content: prompt }],
         }),
       });
-      //console.log("Prompt", prompt);
+      console.log("Prompt", prompt);
 
       const data = await response.json();
       setGeneratedBio(
