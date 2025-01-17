@@ -56,7 +56,7 @@ const Page = () => {
             <div className="flex items-center justify-center gap-2 opacity-0 animate-slide-up">
               <div className="flex items-center justify-center">
                 <Image
-                  src="/linkedin-bio-generator/assets/img/meta.png"
+                  src="/assets/img/meta.png"
                   alt="Meta"
                   width={100}
                   height={100}
@@ -66,7 +66,7 @@ const Page = () => {
 
               <div className="-mt-3 flex items-center justify-center">
                 <Image
-                  src="/linkedin-bio-generator/assets/img/cloudflare.png"
+                  src="/assets/img/cloudflare.png"
                   alt="Cloudflare"
                   width={100}
                   height={100}
