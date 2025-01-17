@@ -227,7 +227,7 @@ Follow these guidelines:
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-sm sm:text-base text-gray-700 italic antialiased"
+            className="text-xs sm:text-base text-gray-700 italic antialiased"
           >
             {language === "en"
               ? "Your bio will be written in English."
