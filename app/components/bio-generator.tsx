@@ -313,7 +313,7 @@ Follow these guidelines:
                       : "border border-gray-200 hover:border-indigo-300"
                   }`}
                   onClick={() => handleCardInteraction(vibeOption)}
-                  onTouchStart={() => handleCardInteraction(vibeOption)}
+                  //onTouchStart={() => handleCardInteraction(vibeOption)}
                   onMouseEnter={() => setActiveHint(vibeOption.name)}
                   onMouseLeave={() => setActiveHint(null)}
                 >
