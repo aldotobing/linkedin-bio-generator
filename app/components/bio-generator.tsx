@@ -24,7 +24,7 @@ const shuffledTemplates = shuffleArray([...templates]);
 export function BioGenerator() {
   const [role, setRole] = useState("");
   const [isTemplateVisible, setIsTemplateVisible] = useState(false);
-  const [vibe, setVibe] = useState("professional");
+  const [vibe, setVibe] = useState("Professional");
   const [additionalContext, setAdditionalContext] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedBio, setGeneratedBio] = useState("");
