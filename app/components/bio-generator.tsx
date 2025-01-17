@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, CheckCircle2, Sparkles, Copy } from "lucide-react";
+import { Loader2, CheckCircle2, Sparkles, Copy, Info } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { marked } from "marked";
 import ReactCountryFlag from "react-country-flag";
@@ -30,6 +30,8 @@ export function BioGenerator() {
   const [generatedBio, setGeneratedBio] = useState("");
   const [isCopying, setIsCopying] = useState(false);
   const [language, setLanguage] = useState("en");
+  const [activeHint, setActiveHint] = useState<string | null>(null);
+  const [selectedVibe, setSelectedVibe] = useState("");
 
   async function generateBio() {
     if (!role) {
@@ -48,7 +50,7 @@ Follow these guidelines:
 
 2. Structure:
    - Hook: Start with an attention-grabbing opener that defines your professional identity
-   - Impact: Highlight 2-3 specific achievements with measurable results with kind of methodology used (numbers preferred)
+   - Impact: Highlight 2-3 specific achievements
    - Expertise: Mention your core technical skills and specializations
    - Value: Describe your unique approach or methodology that sets you apart
    - Vision: End with a clear purpose or call to action
@@ -60,7 +62,7 @@ Follow these guidelines:
    - Professional passion or driving motivation
 
 4. Format:
-   - Length: 2-3 concise paragraphs (250-400 characters)
+   - Length: 2-3 concise paragraphs (350-500 characters)
    - Tone: Confident but approachable
    - Voice: First-person narrative
    ${
@@ -72,7 +74,6 @@ Follow these guidelines:
 5. Avoid:
    - Generic buzzwords and clichés
    - Personal information unrelated to career
-   - Lengthy skill lists
    - Overly formal or casual language
    - Translation notes or word/character counts
    - Any explanatory notes at the bottom`;
@@ -87,6 +88,7 @@ Follow these guidelines:
           messages: [{ role: "user", content: prompt }],
         }),
       });
+      //console.log("Prompt", prompt);
 
       const data = await response.json();
       setGeneratedBio(
@@ -96,7 +98,6 @@ Follow these guidelines:
       );
       toast.success("Your bio is ready! ✨");
     } catch (error) {
-      //console.error("Error:", error);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setIsGenerating(false);
@@ -156,7 +157,7 @@ Follow these guidelines:
     return (
       <div className="space-y-4">
         <Label className="text-base sm:text-lg font-semibold text-indigo-700">
-          🌐 Choose Your Language
+          🌐 Choose your language
         </Label>
 
         <div className="flex justify-center gap-5">
@@ -237,13 +238,13 @@ Follow these guidelines:
 
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-      <Card className="p-4 sm:p-6 md:p-8 shadow-lg border-2 border-indigo-500 bg-gradient-to-br from-indigo-100 to-white">
+      <Card className="p-4 sm:p-6 md:p-8 shadow-lg border-2 border-indigo-100 bg-gradient-to-br from-indigo-100 to-white">
         <div className="space-y-4 sm:space-y-6">
           {/* Role Input with Templates */}
           <div className="space-y-2 relative">
             <Label
               htmlFor="role"
-              className="text-base sm:text-lg font-semibold text-indigo-700 flex items-center gap-2"
+              className="text-base sm:text-lg font-semibold text-indigo-500 flex items-center gap-2"
             >
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
               What's your role?
@@ -295,23 +296,41 @@ Follow these guidelines:
               {vibeOptions.map((vibeOption) => (
                 <Card
                   key={vibeOption.name.toLowerCase()}
-                  className={`p-3 cursor-pointer transition-all duration-200 hover:shadow-md ${
-                    vibe === vibeOption.name.toLowerCase()
+                  className={`relative p-3 cursor-pointer transition-all duration-200 hover:shadow-md group ${
+                    selectedVibe === vibeOption.name
                       ? "border-2 border-indigo-500 bg-indigo-50"
                       : "border border-gray-200 hover:border-indigo-300"
                   }`}
-                  onClick={() => setVibe(vibeOption.name.toLowerCase())}
+                  onClick={() => {
+                    setSelectedVibe(vibeOption.name);
+                    setVibe(vibeOption.name);
+                  }}
+                  onMouseEnter={() => setActiveHint(vibeOption.name)}
+                  onMouseLeave={() => setActiveHint(null)}
                 >
                   <div className="flex flex-col h-full">
-                    {/* Title only, visible for all screen sizes */}
-                    <h3 className="font-semibold text-sm sm:text-base text-indigo-700 mb-1">
-                      {vibeOption.name}
-                    </h3>
-
-                    {/* Description hidden on small screens */}
-                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-2 hidden sm:block mb-2">
+                    <div className="flex justify-between items-start">
+                      <h3 className="font-semibold text-sm sm:text-base text-indigo-700 mb-1">
+                        {vibeOption.name}
+                      </h3>
+                      {/* <Info
+                        size={16}
+                        className="text-gray-400 group-hover:text-indigo-500 transition-colors"
+                      /> */}
+                    </div>
+                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">
                       {vibeOption.description}
                     </p>
+
+                    {/* Tooltip */}
+                    {activeHint === vibeOption.name && (
+                      <div className="absolute z-50 left-0 right-0 -bottom-2 transform translate-y-full mx-2">
+                        <div className="bg-gray-900 text-white p-2 rounded-md text-xs shadow-lg">
+                          {vibeOption.description}
+                          <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-900 transform rotate-45" />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </Card>
               ))}
