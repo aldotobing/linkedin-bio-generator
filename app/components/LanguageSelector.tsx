@@ -1,9 +1,8 @@
-// components/LanguageSelector.tsx
-
 import React from "react";
 import { motion } from "framer-motion";
 import ReactCountryFlag from "react-country-flag";
 import { Label } from "@/components/ui/label";
+import { Globe } from "lucide-react";
 
 interface LanguageSelectorProps {
   language: string;
@@ -14,83 +13,116 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   language,
   setLanguage,
 }) => {
+  const languages = [
+    {
+      code: "en",
+      countryCode: "GB",
+      message: "Your bio will be crafted in English ✨",
+      accentColor: "blue",
+    },
+    {
+      code: "id",
+      countryCode: "ID",
+      message: "Bio Anda akan ditulis dengan Bahasa Indonesia ✨",
+      accentColor: "red",
+    },
+  ];
+
   return (
     <div className="space-y-6">
-      {/* Title */}
-      <Label className="text-base sm:text-md font-semibold text-indigo-700">
-        🌐 Choose your language
-      </Label>
-
-      {/* Language Options */}
-      <div className="flex justify-center gap-6">
-        {/* English Language Button */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className={`relative flex items-center p-2 transition-all duration-300 ${
-            language === "en"
-              ? "border-2 border-blue-400 rounded-md"
-              : "border-2 border-transparent"
-          }`}
-          onClick={() => setLanguage("en")}
+      {/* Title with animated globe */}
+      <div className="flex items-center gap-2">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         >
-          <ReactCountryFlag
-            countryCode="GB"
-            svg
-            style={{ height: "40px", width: "60px" }}
-            title="English"
-          />
-          {language === "en" && (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className="absolute -top-2 -right-2 bg-blue-600 text-white rounded-full p-1 text-xs shadow-lg"
-            >
-              ✔
-            </motion.div>
-          )}
-        </motion.button>
-
-        {/* Indonesian Language Button */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className={`relative flex items-center p-2 transition-all duration-300 ${
-            language === "id"
-              ? "border-2 border-red-400 rounded-md"
-              : "border-2 border-transparent"
-          }`}
-          onClick={() => setLanguage("id")}
-        >
-          <ReactCountryFlag
-            countryCode="ID"
-            svg
-            style={{ height: "40px", width: "60px" }}
-            title="Indonesian"
-          />
-          {language === "id" && (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full p-1 text-xs shadow-lg"
-            >
-              ✔
-            </motion.div>
-          )}
-        </motion.button>
+          <Globe className="w-5 h-5 text-indigo-600" />
+        </motion.div>
+        <Label className="text-base sm:text-md font-semibold text-indigo-700">
+          Choose your Language
+        </Label>
       </div>
 
-      {/* Info Text */}
+      {/* Language Options */}
+      <div className="flex justify-center gap-8">
+        {languages.map((lang) => (
+          <motion.button
+            key={lang.code}
+            whileHover={{
+              scale: 1.05,
+              y: -5,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{ scale: 0.95 }}
+            className={`
+              relative group flex flex-col items-center p-3 rounded-xl
+              transition-all duration-300 transform
+              ${
+                language === lang.code
+                  ? `bg-${lang.accentColor}-50 shadow-lg ring-2 ring-${lang.accentColor}-400`
+                  : "hover:bg-gray-50"
+              }
+            `}
+            onClick={() => setLanguage(lang.code)}
+          >
+            {/* Flag with hover effect */}
+            <motion.div
+              className="relative"
+              whileHover={{ rotate: [0, -5, 5, -5, 5, 0] }}
+              transition={{ duration: 0.5 }}
+            >
+              <ReactCountryFlag
+                countryCode={lang.countryCode}
+                svg
+                style={{
+                  height: "50px",
+                  width: "70px",
+                  filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))",
+                }}
+              />
+
+              {/* Selection indicator */}
+              {language === lang.code && (
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  className={`absolute -top-3 -right-3 bg-${lang.accentColor}-500 text-white rounded-full p-1.5 shadow-lg`}
+                >
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 0.5, repeat: Infinity }}
+                  >
+                    ✨
+                  </motion.span>
+                </motion.div>
+              )}
+            </motion.div>
+
+            {/* Language name */}
+            <span
+              className={`
+              mt-2 text-sm font-medium
+              ${
+                language === lang.code
+                  ? `text-${lang.accentColor}-600`
+                  : "text-gray-600 group-hover:text-gray-800"
+              }
+            `}
+            ></span>
+          </motion.button>
+        ))}
+      </div>
+
+      {/* Animated Info Text */}
       <div className="flex justify-center">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-xs sm:text-base text-gray-700 italic antialiased"
+          key={language}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="text-sm text-gray-600 italic text-center px-4 py-2 rounded-full"
         >
-          {language === "en"
-            ? "Your bio will be written in English."
-            : "Bio Anda akan ditulis dalam Bahasa Indonesia."}
+          {languages.find((lang) => lang.code === language)?.message}
         </motion.div>
       </div>
     </div>
