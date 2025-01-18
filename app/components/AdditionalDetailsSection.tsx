@@ -103,7 +103,7 @@ or notes, and voice type as first-person narrative.
         }),
       });
 
-      console.log("generate prompt :", prompt);
+      //   console.log("generate prompt :", prompt);
 
       const data = await response.json();
       const template =

@@ -15,6 +15,7 @@ import { VibeSelector } from "./VibeSelector";
 import RoleInput from "./RoleInput";
 import CopyToClipboardButton from "./CopyToClipboardButton";
 import FormattedBio from "./FormattedBio";
+import { CoverLetterGenerator } from "./CoverLetterGenerator";
 
 export function BioGenerator() {
   const [role, setRole] = useState("");
@@ -192,10 +193,20 @@ export function BioGenerator() {
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  className="mt-4 flex flex-row justify-between gap-4"
                 >
+                  {/* Tombol Copy to Clipboard di Kiri */}
                   <CopyToClipboardButton
                     isCopying={isCopying}
                     handleCopy={handleCopy}
+                  />
+
+                  {/* Tombol Generate Cover Letter di Kanan */}
+                  <CoverLetterGenerator
+                    bioContext={generatedBio}
+                    role={role}
+                    vibe={vibe}
+                    language={language}
                   />
                 </motion.div>
               </Card>
