@@ -1,7 +1,7 @@
 "use client"; // Add this line at the top to mark this file as a Client Component
 
 import React, { useEffect, useState } from "react";
-import { Sparkles } from "lucide-react";
+import { User } from "lucide-react";
 import { BioGenerator } from "./components/BioGenerator";
 import Image from "next/image";
 
@@ -48,10 +48,8 @@ const Page = () => {
 
           <div className="flex flex-col items-center space-y-6">
             <div className="-mt-2 flex items-center gap-2 px-4 py-1 rounded-full bg-purple-200 dark:bg-purple-900/30">
-              <Sparkles className="w-3 h-3 text-purple-600 dark:text-purple-300 animate-pulse" />
-              <span className="text-md text-purple-600 dark:text-purple-200 antialiased">
-                Powered by
-              </span>
+              {/* <User className="w-3 h-3 text-purple-900 dark:text-purple-300 animate-pulse" /> */}
+              <span className="text-sm  antialiased">Powered by</span>
               <div className="mt-1 flex items-center justify-center gap-2 opacity-0 animate-slide-up">
                 <div className="flex items-center justify-center">
                   <Image
