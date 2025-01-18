@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AnimatePresence, motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { templates } from "./options";
+import { templates } from "./TemplateOptions";
 
 interface RoleInputProps {
   role: string;

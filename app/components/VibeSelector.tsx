@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
-import { vibeOptions } from "./options"; // Ensure this imports correctly
+import { vibeOptions } from "./VibeOptions"; // Ensure this imports correctly
 import { useState } from "react";
 
 interface VibeSelectorProps {

@@ -12,42 +12,6 @@ import {
   Globe,
 } from "lucide-react";
 
-export const templates = [
-  "Software Engineer",
-  "Product Manager",
-  "UX Designer",
-  "Data Scientist",
-  "DevOps Engineer",
-  "Marketing Manager",
-  "Graphic Designer",
-  "Business Analyst",
-  "Financial Analyst",
-  "Auditor",
-  "Architect",
-  "Civil Engineer",
-  "Admin",
-  "Finance Manager",
-  "Mechanical Engineer",
-  "HR Manager",
-  "Sales Executive",
-  "Operations Manager",
-  "Project Manager",
-  "Consultant",
-  "Lawyer",
-  "Doctor",
-  "Dentist",
-  "Pharmacist",
-  "Psychologist",
-  "Helper",
-  "Designer",
-  "Teacher",
-  "Nurse",
-  "Customer Service Representative",
-  "Content Creator",
-  "Social Media Manager",
-  "Digital Marketer",
-];
-
 export const vibeOptions = [
   {
     name: "Professional",
