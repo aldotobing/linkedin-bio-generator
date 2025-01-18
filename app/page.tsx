@@ -38,17 +38,18 @@ const Page = () => {
       <div className="container max-w-4xl mx-auto px-4 py-8 relative">
         <div className="mt-5 text-center mb-12 opacity-0 animate-fade-in">
           <h1 className="text-2xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-4 hover:scale-105 transition-transform duration-300">
-            Craft Your Perfect LinkedIn Bio
+            Craft Your Perfect Bio
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8 transform hover:translate-y-1 transition-transform duration-300">
-            Transform your professional story into an engaging LinkedIn bio that
-            captures attention and showcases your unique value.
+          <p className="text-gray-600 dark:text-gray-300 text-md md:text-xl max-w-2xl mx-auto mb-8 transform hover:translate-y-1 transition-transform duration-300 antialiased">
+            Transform your professional story into an engaging bio that captures
+            attention and showcases your unique value on LinkedIn, your personal
+            website, or portfolio
           </p>
 
           <div className="flex flex-col items-center space-y-6">
             <div className="-mt-2 flex items-center gap-2 px-4 py-1 rounded-full bg-purple-200 dark:bg-purple-900/30">
               <Sparkles className="w-3 h-3 text-purple-600 dark:text-purple-300 animate-pulse" />
-              <span className="text-lg text-purple-600 dark:text-purple-300">
+              <span className="text-md text-purple-600 dark:text-purple-200 antialiased">
                 Powered by
               </span>
               <div className="mt-1 flex items-center justify-center gap-2 opacity-0 animate-slide-up">

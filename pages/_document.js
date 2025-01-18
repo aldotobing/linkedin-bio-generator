@@ -20,12 +20,9 @@ export default function Document() {
         />
         <meta
           property="og:image"
-          content="https://aldotobing.github.io/assets/img/preview.svg"
+          content="hhttps://aldotobing.github.io/assets/img/favicon.png"
         />
-        <meta
-          property="og:url"
-          content="https://aldotobing.github.io/linkedin-bio-generator"
-        />
+        <meta property="og:url" content="https://linkedin.aldotobing.online" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <body>
