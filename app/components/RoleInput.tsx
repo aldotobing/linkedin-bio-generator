@@ -9,10 +9,11 @@ import { templates } from "./TemplateOptions";
 
 interface RoleInputProps {
   role: string;
-  setRole: (role: string) => void;
+  setRole: (value: string) => void;
   isTemplateVisible: boolean;
-  setIsTemplateVisible: (isVisible: boolean) => void;
+  setIsTemplateVisible: (value: boolean) => void;
   handleTemplateClick: (template: string) => void;
+  roleRef: React.RefObject<HTMLInputElement>;
 }
 
 const RoleInput: FC<RoleInputProps> = ({
@@ -21,6 +22,7 @@ const RoleInput: FC<RoleInputProps> = ({
   isTemplateVisible,
   setIsTemplateVisible,
   handleTemplateClick,
+  roleRef,
 }) => {
   const shuffledTemplates = templates.sort(() => Math.random() - 0.5); // Shuffle templates
 
@@ -34,6 +36,7 @@ const RoleInput: FC<RoleInputProps> = ({
         What's your role?
       </Label>
       <Input
+        ref={roleRef}
         id="role"
         placeholder="e.g. Senior Software Engineer at Google. You can type or choose a template..."
         value={role}

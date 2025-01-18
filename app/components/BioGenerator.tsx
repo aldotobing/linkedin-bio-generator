@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -27,6 +27,9 @@ export function BioGenerator() {
   const [language, setLanguage] = useState("en");
   const [activeHint, setActiveHint] = useState<string | null>(null);
   const [selectedVibe, setSelectedVibe] = useState("");
+
+  // Add the roleRef
+  const roleRef = useRef<HTMLInputElement>(null);
 
   async function generateBio() {
     if (!role) {
@@ -106,6 +109,7 @@ export function BioGenerator() {
             isTemplateVisible={isTemplateVisible}
             setIsTemplateVisible={setIsTemplateVisible}
             handleTemplateClick={(template: string) => setRole(template)}
+            roleRef={roleRef} // Pass the ref to RoleInput
           />
 
           {/* Vibe Selector Component */}
@@ -122,6 +126,7 @@ export function BioGenerator() {
             setAdditionalContext={setAdditionalContext}
             role={role}
             vibe={vibe}
+            roleRef={roleRef} // Pass the ref to AdditionalDetailsSection
           />
 
           {/* Language Selection */}
