@@ -61,7 +61,7 @@ const CopyToClipboardButton = ({
             Copied!
           </motion.span>
         ) : (
-          "Copy to Clipboard"
+          "Copy"
         )}
       </motion.span>
     </Button>
