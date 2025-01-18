@@ -193,20 +193,22 @@ export function BioGenerator() {
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="mt-4 flex flex-row justify-between gap-4"
+                  className="mt-4 flex flex-col items-center gap-4"
                 >
-                  {/* Tombol Copy to Clipboard di Kiri */}
+                  {/* Tombol Copy to Clipboard di Atas */}
                   <CopyToClipboardButton
                     isCopying={isCopying}
                     handleCopy={handleCopy}
+                    className="w-48 h-12" // Ensure matching height
                   />
 
-                  {/* Tombol Generate Cover Letter di Kanan */}
+                  {/* Tombol Generate Cover Letter di Bawah */}
                   <CoverLetterGenerator
                     bioContext={generatedBio}
                     role={role}
                     vibe={vibe}
                     language={language}
+                    className="w-48 h-12 flex " // Ensure matching height here as well
                   />
                 </motion.div>
               </Card>

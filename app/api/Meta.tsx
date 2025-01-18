@@ -60,7 +60,7 @@ Follow these guidelines:
       }),
     });
 
-    console.log("generate promtp :", prompt);
+    // console.log("generate promtp :", prompt);
 
     const data = await response.json();
     return (

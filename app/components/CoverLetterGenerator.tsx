@@ -28,6 +28,7 @@ interface CoverLetterGeneratorProps {
   role: string;
   vibe: string;
   language: string;
+  className?: string;
 }
 
 export function CoverLetterGenerator({
@@ -187,7 +188,7 @@ export function CoverLetterGenerator({
         className="ml-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:from-violet-600 hover:to-purple-700 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center gap-2"
       >
         <UserCircle size={20} />
-        Create Professional Cover Letter ✨
+        Create Cover Letter ✨
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
