@@ -17,7 +17,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   return (
     <div className="space-y-6">
       {/* Title */}
-      <Label className="text-base sm:text-lg font-semibold text-indigo-700">
+      <Label className="text-base sm:text-md font-semibold text-indigo-700">
         🌐 Choose your language
       </Label>
 

@@ -46,32 +46,41 @@ const Page = () => {
           </p>
 
           <div className="flex flex-col items-center space-y-6">
-            <div className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-purple-200 dark:bg-purple-900/30">
+            <div className="-mt-2 flex items-center gap-2 px-4 py-1 rounded-full bg-purple-200 dark:bg-purple-900/30">
               <Sparkles className="w-3 h-3 text-purple-600 dark:text-purple-300 animate-pulse" />
               <span className="text-lg text-purple-600 dark:text-purple-300">
-                Powered by Llama-3.3 70B
+                Powered by
               </span>
-            </div>
+              <div className="mt-1 flex items-center justify-center gap-2 opacity-0 animate-slide-up">
+                <div className="flex items-center justify-center">
+                  <Image
+                    src="/assets/img/meta.png"
+                    alt="Meta"
+                    width={60}
+                    height={60}
+                    className="object-contain  transition-transform duration-300"
+                  />
+                </div>
 
-            <div className="flex items-center justify-center gap-2 opacity-0 animate-slide-up">
-              <div className="flex items-center justify-center">
-                <Image
-                  src="/assets/img/meta.png"
-                  alt="Meta"
-                  width={100}
-                  height={100}
-                  className="object-contain hover:scale-110 transition-transform duration-300"
-                />
-              </div>
+                <div className="flex items-center justify-center">
+                  <Image
+                    src="/assets/img/mistral.svg"
+                    alt="Mistral"
+                    width={50}
+                    height={50}
+                    className="object-contain  transition-transform duration-300"
+                  />
+                </div>
 
-              <div className="-mt-3 flex items-center justify-center">
-                <Image
-                  src="/assets/img/cloudflare.png"
-                  alt="Cloudflare"
-                  width={100}
-                  height={100}
-                  className="object-contain hover:scale-110 transition-transform duration-300"
-                />
+                <div className="-mt-1 -ml-1.5 flex items-center justify-center">
+                  <Image
+                    src="/assets/img/cloudflare.png"
+                    alt="Cloudflare"
+                    width={70}
+                    height={70}
+                    className="object-contain  transition-transform duration-300"
+                  />
+                </div>
               </div>
             </div>
           </div>
