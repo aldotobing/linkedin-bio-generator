@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
-import { BioGenerator } from "./components/bio-generator";
+import { BioGenerator } from "./components/BioGenerator";
 import Image from "next/image";
 
 const Page = () => {

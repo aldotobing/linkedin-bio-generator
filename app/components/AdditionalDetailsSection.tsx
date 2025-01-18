@@ -43,7 +43,15 @@ Your response must focus on the most important points, including:
 2. A notable project or initiative.
 3. Core skills or expertise.
 
-Keep the response brief, impactful, and ready for use without placeholders or notes.
+Avoid:
+   - Generic buzzwords and clichés
+   - Personal information unrelated to career
+   - Overly formal or casual language
+   - Translation notes or word/character counts
+   - Any explanatory notes at the bottom
+
+Keep the response brief, impactful, and ready for use without placeholders 
+or notes, and voice type as first-person narrative.
 `;
 
     try {
@@ -54,10 +62,11 @@ Keep the response brief, impactful, and ready for use without placeholders or no
         },
         body: JSON.stringify({
           messages: [{ role: "user", content: prompt }],
+          type: "additional",
         }),
       });
 
-      //console.log("template :", prompt);
+      //   console.log("template :", prompt);
 
       const data = await response.json();
       const template =
@@ -79,7 +88,7 @@ Keep the response brief, impactful, and ready for use without placeholders or no
       <div className="flex justify-between items-center">
         <Label
           htmlFor="additionalContext"
-          className="text-base sm:text-lg font-semibold text-indigo-700"
+          className="text-base sm:text-md font-semibold text-indigo-700"
         >
           📝 Additional details
         </Label>
@@ -91,9 +100,9 @@ Keep the response brief, impactful, and ready for use without placeholders or no
           className="flex items-center gap-2 text-indigo-600 border-indigo-300 hover:bg-indigo-50"
         >
           {isGeneratingTemplate ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <Loader2 className="h-3 w-3 animate-spin" />
           ) : (
-            <Sparkles className="h-4 w-4" />
+            <Sparkles className="h-3 w-3" />
           )}
           <span className="text-sm">
             {isGeneratingTemplate ? "Generating..." : "Get Example"}
