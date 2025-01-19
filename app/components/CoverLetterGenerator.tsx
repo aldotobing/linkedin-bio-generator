@@ -92,7 +92,7 @@ export function CoverLetterGenerator({
             {
               role: "user",
               content: `Write only the body content of a professional cover letter in ${
-                language === "en" ? "English" : "Indonesian"
+                language === "en" ? "English" : "Indonesian (please use proper and bahasa baku  indonesian language refering to kamus besar bahasa indonesia)"
               } using the following information:
   
   Applicant Information:
@@ -140,10 +140,21 @@ export function CoverLetterGenerator({
     ${formData.address || ""}
   </div>
   
-  <div style="margin-top: 40px;">
-    <p>Dear HR at ${formData.companyName},</p>
-    <p>${formData.companyAddress || ""}</p>
-  </div>
+  <div style="margin-top: 300px;">
+  {language === "id" ? (
+    <>
+      <p>Kepada Yth :</p>
+      <p>{formData.companyName}</p>
+      <p>{formData.companyAddress || ""}</p>
+      <p>Di Tempat</p>
+    </>
+  ) : (
+    <>
+      <p>Dear HR at {formData.companyName},</p>
+      <p>{formData.companyAddress || ""}</p>
+    </>
+  )}
+</div>
   
   <div style="margin-top: 40px; white-space: pre-wrap;">
     ${letterContentWithBreaks}
