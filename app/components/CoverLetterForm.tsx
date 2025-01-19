@@ -240,12 +240,15 @@ Do not include the applicant's name, date, or closing remarks. Focus on:
 
   const hiringManagerGreeting = () => {
     if (!formData.hiringManager && language === "id") {
-      return `Bpk/Ibu HR 
+      return `Kepada Yth : </br> 
+      Bpk/Ibu HR 
       </br> 
       <b>${formData.companyName}</b> 
       </br> Di Tempat `;
     } else if (formData.hiringManager && language === "id") {
-      return `Bpk/Ibu ${formData.hiringManager} <br/>
+      return `Kepada Yth : </br>
+      Bpk/Ibu ${formData.hiringManager} 
+      <br/>
       <b>${formData.companyName}</b>
       </br>
        Di Tempat`;
