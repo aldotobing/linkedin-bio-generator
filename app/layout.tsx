@@ -2,9 +2,9 @@ import "./globals.css";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "LinkedIn Bio Generator",
+  title: "Personal Bio Generator",
   description:
-    "Transform your professional story into an engaging LinkedIn bio",
+    "Transform your professional story into an engaging bio that captures attention and showcases your unique value on LinkedIn, your personal website, or portfolio",
 };
 
 export default function RootLayout({
