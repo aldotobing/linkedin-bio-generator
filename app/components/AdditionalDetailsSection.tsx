@@ -76,7 +76,7 @@ You are tasked with generating a concise example for the "Additional Context/Det
 The example should reflect the user's provided role as "${role}".
 
 Your response must focus on the most important points, including:
-1. One or two key achievements with metrics.
+1. One or two key achievements.
 2. A notable project or initiative.
 3. Core skills or expertise.
 
@@ -87,7 +87,7 @@ Avoid:
    - Translation notes or word/character counts
    - Any explanatory notes at the bottom
 
-Keep the response brief, impactful, and ready for use without placeholders 
+Keep the response brief, impactful, concise, and clear. And ready for use without placeholders 
 or notes, and voice type as first-person narrative.
 `;
 

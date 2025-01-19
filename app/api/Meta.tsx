@@ -33,7 +33,7 @@ Follow these guidelines:
    - Professional passion or driving motivation
 
 4. Format:
-   - Length: 2-3 concise paragraphs (350-500 characters)
+   - Length: 2-3 concise paragraphs (300-400 characters)
    - Tone: Confident but approachable
    - Voice: First-person narrative
    ${

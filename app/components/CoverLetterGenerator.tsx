@@ -1,4 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import DatePicker from "react-datepicker";
+import { DayPicker } from "react-day-picker";
+import { format } from "date-fns";
+import "react-day-picker/dist/style.css";
+import "react-datepicker/dist/react-datepicker.css";
+import { id } from "date-fns/locale/id";
 import {
   Dialog,
   DialogContent,
@@ -21,7 +27,6 @@ import {
 import { toast } from "react-hot-toast";
 import { usePDFGeneration } from "@/hooks/usePDFGeneration";
 import { generateSummary } from "@/utils/textUtils";
-import { format } from "date-fns";
 
 interface CoverLetterGeneratorProps {
   bioContext: string;
@@ -40,25 +45,39 @@ export function CoverLetterGenerator({
   const [isOpen, setIsOpen] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedCoverLetter, setGeneratedCoverLetter] = useState("");
-  const [currentDate, setCurrentDate] = useState(
-    format(new Date(), "dd MMMM yyyy")
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+    new Date()
   );
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
     address: "",
+    city: "",
     companyName: "",
     companyAddress: "",
     companyEmail: "",
     companyPhone: "",
-    positionApplying: "",
+    positionApplying: role, // Default to role prop
     hiringManager: "",
     portfolio: "",
     linkedIn: "",
     additionalInfo: "",
-    letterDate: currentDate,
+    letterDate: selectedDate
+      ? format(selectedDate, "dd MMMM yyyy", { locale: id })
+      : "",
   });
+
+  const [isMandatoryDialogOpen, setIsMandatoryDialogOpen] = useState(false);
+  const [missingField, setMissingField] = useState("");
+
+  const fullNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const addressRef = useRef<HTMLInputElement>(null);
+  const cityRef = useRef<HTMLInputElement>(null);
+  const companyNameRef = useRef<HTMLInputElement>(null);
+  const positionApplyingRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -67,20 +86,85 @@ export function CoverLetterGenerator({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const { generateDOCX } = usePDFGeneration();
+  const handleDateChange = (date: Date | undefined) => {
+    setSelectedDate(date);
+    if (date) {
+      setFormData((prev) => ({
+        ...prev,
+        letterDate: format(date, "dd MMMM yyyy", { locale: id }),
+      }));
+    }
+    setIsDatePickerOpen(false); // Close the date picker after selection
+  };
 
-  async function generateCoverLetter() {
-    if (
-      !formData.fullName ||
-      !formData.email ||
-      !formData.companyName ||
-      !formData.positionApplying
-    ) {
-      toast.error("Please fill in all required fields marked with *");
+  const areRequiredFieldsFilled = () => {
+    const { fullName, email, address, city, companyName, positionApplying } =
+      formData;
+    return (
+      fullName && email && address && city && companyName && positionApplying
+    );
+  };
+
+  const hiringManagerGreeting = () => {
+    if (!formData.hiringManager && language === "id") {
+      return `Bpk/Ibu HR 
+      </br> 
+      ${formData.companyName} 
+      </br> Di Tempat `;
+    } else if (formData.hiringManager && language === "id") {
+      return `Bpk/Ibu ${formData.hiringManager} <br/>
+      ${formData.companyName}
+      </br>
+       Di Tempat`;
+    } else {
+      return `Dear HR at ${formData.companyName},`;
+    }
+  };
+
+  const generateCoverLetter = async () => {
+    const { fullName, email, address, city, companyName, positionApplying } =
+      formData;
+
+    if (!fullName) {
+      setMissingField("Full Name");
+      setIsMandatoryDialogOpen(true);
+      fullNameRef.current?.focus();
+      return;
+    }
+    if (!email) {
+      setMissingField("Email");
+      setIsMandatoryDialogOpen(true);
+      emailRef.current?.focus();
+      return;
+    }
+    if (!address) {
+      setMissingField("Address");
+      setIsMandatoryDialogOpen(true);
+      addressRef.current?.focus();
+      return;
+    }
+    if (!city) {
+      setMissingField("City");
+      setIsMandatoryDialogOpen(true);
+      cityRef.current?.focus();
+      return;
+    }
+    if (!companyName) {
+      setMissingField("Company Name");
+      setIsMandatoryDialogOpen(true);
+      companyNameRef.current?.focus();
+      return;
+    }
+    if (!positionApplying) {
+      setMissingField("Position Applying For");
+      setIsMandatoryDialogOpen(true);
+      positionApplyingRef.current?.focus();
       return;
     }
 
+    setGeneratedCoverLetter(""); // Clear the generated letter
     setIsGenerating(true);
+
     const bioSummary = generateSummary(bioContext, 100);
 
     try {
@@ -92,31 +176,35 @@ export function CoverLetterGenerator({
             {
               role: "user",
               content: `Write only the body content of a professional cover letter in ${
-                language === "en" ? "English" : "Indonesian (please use proper and bahasa baku  indonesian language refering to kamus besar bahasa indonesia)"
+                language === "en"
+                  ? "English"
+                  : "Indonesian (please use proper and formal indonesian language referring to kamus besar bahasa indonesia)"
               } using the following information:
-  
-  Applicant Information:
-  - Full Name: ${formData.fullName}
-  - Email: ${formData.email}
-  - Phone: ${formData.phone || "Not provided"}
-  - Address: ${formData.address || "Not provided"}
-  
-  Company Information:
-  - Company Name: ${formData.companyName}
-  - Company Address: ${formData.companyAddress || "Not provided"}
-  - Position Applying For: ${formData.positionApplying}
-  - Hiring Manager: ${formData.hiringManager || "Not specified"}
-  
-  Professional Background Summary:
-  ${bioSummary}
-  
-  Additional Information:
-  ${formData.additionalInfo || "None"}
-  
-  Do not include the applicant's name, date, or closing remarks. Focus on:
-  1. A strong introduction mentioning the position and source of information.
-  2. Relevant experience, skills, and contributions.
-  3. A closing paragraph expressing enthusiasm, requesting an interview, and showing gratitude.`,
+
+Applicant Information:
+- Full Name: ${formData.fullName}
+- Email: ${formData.email}
+- Phone: ${formData.phone || "Not provided"}
+- Address: ${formData.address || "Not provided"}
+- City: ${formData.city || "Not provided"}
+
+Company Information:
+- Company Name: ${formData.companyName}
+- Company Address: ${formData.companyAddress || "Not provided"}
+- Position Applying For: ${formData.positionApplying}
+- Hiring Manager: ${formData.hiringManager || "Not specified"}
+
+Professional Background Summary:
+${bioSummary}
+
+Additional Information:
+${formData.additionalInfo || "None"}
+
+Do not include the applicant's name, date, or closing remarks. Focus on:
+1. A strong introduction mentioning the position and source of information.
+2. Relevant experience, skills, and contributions.
+3. A closing paragraph expressing enthusiasm, requesting an interview, and showing gratitude.
+4. Keep it brief, concise, and clear`,
             },
           ],
         }),
@@ -127,47 +215,36 @@ export function CoverLetterGenerator({
         data.response || "Failed to create the cover letter. Please try again.";
       const letterContentWithBreaks = letterContent.replace(/\n/g, "<br />");
 
-      // Static modification of the generated content
       const formattedLetter = `
-  <div style="text-align: right; font-weight: bold;">
-    ${formData.letterDate}
-  </div>
-  
-  <div style="margin-top: 40px;">
-    <strong>${formData.fullName}</strong><br />
-    ${formData.phone || ""}<br />
-    ${formData.email || ""}<br />
-    ${formData.address || ""}
-  </div>
-  
-  <div style="margin-top: 300px;">
-  {language === "id" ? (
-    <>
-      <p>Kepada Yth :</p>
-      <p>{formData.companyName}</p>
-      <p>{formData.companyAddress || ""}</p>
-      <p>Di Tempat</p>
-    </>
-  ) : (
-    <>
-      <p>Dear HR at {formData.companyName},</p>
-      <p>{formData.companyAddress || ""}</p>
-    </>
-  )}
+<div style="text-align: right; font-weight: bold;">
+  ${formData.city}, ${formData.letterDate}
 </div>
-  
-  <div style="margin-top: 40px; white-space: pre-wrap;">
-    ${letterContentWithBreaks}
-  </div>
-  
-  <div style="margin-top: 40px;">
+
+<div style="margin-top: 40px;">
+  <strong>${formData.fullName}</strong><br />
+  ${formData.phone || ""}<br />
+  ${formData.email || ""}<br />
+  ${formData.address || ""}<br />
+  ${formData.city || ""}
+</div>
+
+<div style="margin-top: 40px;">
+  ${hiringManagerGreeting()}<br />
+  <p>${formData.companyAddress || ""}</p>
+</div>
+
+<div style="margin-top: 30px; white-space: pre-wrap;">
+  ${letterContentWithBreaks}
+</div>
+
+<div style="margin-top: 40px;">
   ${language === "id" ? "Hormat Saya," : "Sincerely,"}<br />
   <br>
   <br>
   ${formData.fullName}
 </div>
-  
-  <div style="margin-top: 40px;">
+
+<div style="margin-top: 40px;">
   ${
     language === "id"
       ? "<strong>Lampiran:</strong><br />"
@@ -181,7 +258,7 @@ export function CoverLetterGenerator({
   }<br />
   - ${language === "id" ? "Portfolio " : "Portfolio "}<br />
 </div>
-  `;
+`;
 
       setGeneratedCoverLetter(formattedLetter);
       toast.success("✨ Your professional cover letter is ready!");
@@ -190,7 +267,27 @@ export function CoverLetterGenerator({
     } finally {
       setIsGenerating(false);
     }
-  }
+  };
+
+  // Add a useEffect to handle clicks outside the date picker
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const datePicker = document.querySelector(".react-datepicker");
+      if (datePicker && !datePicker.contains(event.target as Node)) {
+        setIsDatePickerOpen(false);
+      }
+    };
+
+    if (isDatePickerOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDatePickerOpen]);
 
   return (
     <>
@@ -217,18 +314,41 @@ export function CoverLetterGenerator({
 
           <div className="grid gap-6 py-4">
             <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <Calendar size={20} className="text-violet-600" />
-                <Label className="text-lg font-semibold text-violet-700">
-                  Letter Date
-                </Label>
+              <Label className="text-lg font-semibold text-violet-700 flex items-center gap-2">
+                <Calendar size={20} />
+                Letter Date
+              </Label>
+              <div className="relative">
+                <Input
+                  type="text"
+                  value={formData.letterDate}
+                  onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
+                  onBlur={() => setIsDatePickerOpen(false)}
+                  placeholder="Select a date"
+                  className="pl-10 pr-4 py-2 w-48 border-violet-300 focus:ring-violet-500 focus:border-violet-500 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md"
+                  readOnly
+                />
+                <Calendar
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-violet-500"
+                  size={20}
+                />
               </div>
-              <Input
-                name="letterDate"
-                value={formData.letterDate}
-                onChange={handleInputChange}
-                className="w-48"
-              />
+
+              {isDatePickerOpen && (
+                <div className="absolute z-10 mt-2 bg-white border border-violet-200 rounded-lg shadow-lg">
+                  <DayPicker
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={handleDateChange}
+                    locale={id}
+                    modifiersClassNames={{
+                      selected: "bg-violet-500 text-white",
+                      today: "font-bold text-violet-500",
+                    }}
+                    className="p-4"
+                  />
+                </div>
+              )}
             </div>
 
             <div className="space-y-4">
@@ -244,6 +364,7 @@ export function CoverLetterGenerator({
                     placeholder="John Doe"
                     onChange={handleInputChange}
                     className="border-violet-200 focus:ring-violet-500"
+                    ref={fullNameRef}
                   />
                 </div>
                 <div className="space-y-2">
@@ -253,6 +374,7 @@ export function CoverLetterGenerator({
                     placeholder="john@example.com"
                     onChange={handleInputChange}
                     className="border-violet-200 focus:ring-violet-500"
+                    ref={emailRef}
                   />
                 </div>
                 <div className="space-y-2">
@@ -265,12 +387,23 @@ export function CoverLetterGenerator({
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label>Address</Label>
+                  <Label>Address *</Label>
                   <Input
                     name="address"
-                    placeholder="123 Main St, City"
+                    placeholder="123 Main St"
                     onChange={handleInputChange}
                     className="border-violet-200 focus:ring-violet-500"
+                    ref={addressRef}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>City *</Label>
+                  <Input
+                    name="city"
+                    placeholder="City"
+                    onChange={handleInputChange}
+                    className="border-violet-200 focus:ring-violet-500"
+                    ref={cityRef}
                   />
                 </div>
                 <div className="space-y-2">
@@ -307,6 +440,7 @@ export function CoverLetterGenerator({
                     placeholder="Company Name"
                     onChange={handleInputChange}
                     className="border-violet-200 focus:ring-violet-500"
+                    ref={companyNameRef}
                   />
                 </div>
                 <div className="space-y-2">
@@ -341,8 +475,10 @@ export function CoverLetterGenerator({
                   <Input
                     name="positionApplying"
                     placeholder="Position Title"
+                    value={formData.positionApplying}
                     onChange={handleInputChange}
                     className="border-violet-200 focus:ring-violet-500"
+                    ref={positionApplyingRef}
                   />
                 </div>
                 <div className="space-y-2">
@@ -369,20 +505,19 @@ export function CoverLetterGenerator({
 
             <Button
               onClick={generateCoverLetter}
-              disabled={isGenerating}
               className="w-full bg-gradient-to-r from-green-400 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-700 shadow-lg transition-all duration-300 hover:scale-105 py-6 text-lg font-semibold"
             >
               {isGenerating ? (
                 <div className="flex items-center gap-3">
                   <Loader2 className="animate-spin" size={24} />
-                  Generating Your Cover Letter...
+                  Crafting your cover letter...
                 </div>
               ) : (
                 "Generate Cover Letter"
               )}
             </Button>
 
-            {generatedCoverLetter && (
+            {generatedCoverLetter ? (
               <div className="mt-6 space-y-4">
                 <Label className="text-xl font-semibold text-green-700 flex items-center gap-2">
                   Your Professional Cover Letter
@@ -404,8 +539,53 @@ export function CoverLetterGenerator({
                   </Button>
                 </div>
               </div>
+            ) : (
+              <div className="mt-6 space-y-4">
+                <Label className="text-xl font-semibold text-green-700 flex items-center gap-2">
+                  Your Professional Cover Letter
+                </Label>
+                <div className="mt-2 p-6 border rounded-lg bg-white shadow-lg">
+                  {isGenerating ? (
+                    <div className="flex items-center justify-center h-48">
+                      <Loader2
+                        className="animate-spin text-green-500"
+                        size={48}
+                      />
+                      <span className="ml-4 text-lg text-green-700">
+                        Crafting your cover letter...
+                      </span>
+                    </div>
+                  ) : (
+                    <p className="text-gray-500">
+                      Your cover letter will appear here.
+                    </p>
+                  )}
+                </div>
+              </div>
             )}
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Dialog for missing mandatory fields */}
+      <Dialog
+        open={isMandatoryDialogOpen}
+        onOpenChange={setIsMandatoryDialogOpen}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Missing Required Field</DialogTitle>
+            <DialogDescription>
+              Please fill in the <strong>{missingField}</strong> field to
+              proceed.
+            </DialogDescription>
+          </DialogHeader>
+          <Button
+            onClick={() => setIsMandatoryDialogOpen(false)}
+            className="mt-4"
+          >
+            OK
+          </Button>
         </DialogContent>
       </Dialog>
     </>

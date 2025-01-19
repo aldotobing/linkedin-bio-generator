@@ -180,7 +180,6 @@ export function BioGenerator() {
                   🚀 Your Generated Bio
                 </Label>
 
-                {/* Render generatedBio with preserved line breaks using CSS */}
                 <div
                   className="mt-2 sm:mt-4 min-h-[150px] sm:min-h-[200px] focus:ring-4 focus:ring-green-200 text-sm sm:text-base"
                   style={{
@@ -195,23 +194,24 @@ export function BioGenerator() {
                   whileTap={{ scale: 0.98 }}
                   className="mt-4 flex flex-col items-center gap-4"
                 >
-                  {/* Tombol Copy to Clipboard di Atas */}
+                  {/* Copy to Clipboard Button */}
                   <CopyToClipboardButton
                     isCopying={isCopying}
                     handleCopy={handleCopy}
-                    className="w-48 h-12" // Ensure matching height
-                  />
-
-                  {/* Tombol Generate Cover Letter di Bawah */}
-                  <CoverLetterGenerator
-                    bioContext={generatedBio}
-                    role={role}
-                    vibe={vibe}
-                    language={language}
-                    className="w-48 h-12 flex " // Ensure matching height here as well
+                    className="w-40 h-10"
                   />
                 </motion.div>
               </Card>
+              {/* Tombol Generate Cover Letter di Bawah */}
+              <div className="mt-6 flex justify-center">
+                <CoverLetterGenerator
+                  bioContext={generatedBio}
+                  role={role}
+                  vibe={vibe}
+                  language={language}
+                  className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-purple-500 hover:to-indigo-500 shadow-lg text-sm sm:text-base transition-all duration-500 transform hover:scale-105 active:scale-95"
+                />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
