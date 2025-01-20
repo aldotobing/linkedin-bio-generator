@@ -73,12 +73,12 @@ const AdditionalDetailsSection: React.FC<AdditionalDetailsSectionProps> = ({
 
     const prompt = `
 You are tasked with generating a concise example for the "Additional Context/Details" section of a LinkedIn bio. 
-The example should reflect the user's provided role as "${role}".
+The example should focus exclusively on the user's key achievements, passions, or specific skills related to their role as "${role}". 
+ Highlight the most important details without unnecessary storytelling or filler.
 
-Your response must focus on the most important points, including:
-1. One or two key achievements.
-2. A notable project or initiative.
-3. Core skills or expertise.
+Include:
+1. One or two notable achievements. (no measure in numbers)
+2. Specific areas of expertise or passion.
 
 Avoid:
    - Generic buzzwords and clichés
@@ -87,8 +87,7 @@ Avoid:
    - Translation notes or word/character counts
    - Any explanatory notes at the bottom
 
-Keep the response brief, impactful, concise, and clear. And ready for use without placeholders 
-or notes, and voice type as first-person narrative.
+Keep the response brief, impactful, and clear, and ensure it is ready for use without placeholders or notes, using a first-person narrative voice.
 `;
 
     try {
@@ -107,8 +106,8 @@ or notes, and voice type as first-person narrative.
 
       const data = await response.json();
       const template =
-        data.response ||
-        data.choices?.[0]?.text ||
+        data.response?.trim() ||
+        data.choices?.[0]?.text?.trim() ||
         "Failed to generate template.";
       setAdditionalContext(template);
       toast.success("Template generated! ✨");

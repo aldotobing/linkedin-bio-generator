@@ -23,7 +23,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
     {
       code: "id",
       countryCode: "ID",
-      message: "Bio Anda akan ditulis dengan Bahasa Indonesia ✨",
+      message: "Bio Anda akan ditulis dalam Bahasa Indonesia ✨",
       accentColor: "red",
     },
   ];
@@ -44,7 +44,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       </div>
 
       {/* Language Options */}
-      <div className="flex justify-center gap-8">
+      <div className="flex justify-center gap-6">
         {languages.map((lang) => (
           <motion.button
             key={lang.code}
@@ -68,7 +68,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
             {/* Flag with hover effect */}
             <motion.div
               className="relative"
-              whileHover={{ rotate: [0, -5, 5, -5, 5, 0] }}
+              //whileHover={{ rotate: [0, -5, 5, -5, 5, 0] }}
               transition={{ duration: 0.5 }}
             >
               <ReactCountryFlag
@@ -76,39 +76,25 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
                 svg
                 style={{
                   height: "50px",
-                  width: "70px",
+                  width: "60px",
                   filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))",
                 }}
               />
 
               {/* Selection indicator */}
-              {language === lang.code && (
+              {/* {language === lang.code && (
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  className={`absolute -top-3 -right-3 bg-${lang.accentColor}-500 text-white rounded-full p-1.5 shadow-lg`}
+                  className={`absolute -top-3 -right-3 bg-${lang.accentColor}-500 text-white rounded-full p-1.5 shadow-sm`}
                 >
                   <motion.span
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 0.5, repeat: Infinity }}
-                  >
-                    ✨
-                  </motion.span>
+                  ></motion.span>
                 </motion.div>
-              )}
+              )} */}
             </motion.div>
-
-            {/* Language name */}
-            <span
-              className={`
-              mt-2 text-sm font-medium
-              ${
-                language === lang.code
-                  ? `text-${lang.accentColor}-600`
-                  : "text-gray-600 group-hover:text-gray-800"
-              }
-            `}
-            ></span>
           </motion.button>
         ))}
       </div>

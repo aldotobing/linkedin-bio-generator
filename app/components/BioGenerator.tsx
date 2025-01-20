@@ -198,7 +198,6 @@ export function BioGenerator() {
                   <CopyToClipboardButton
                     isCopying={isCopying}
                     handleCopy={handleCopy}
-                    className="w-40 h-10"
                   />
                 </motion.div>
               </Card>

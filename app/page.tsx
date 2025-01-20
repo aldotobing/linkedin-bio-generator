@@ -1,7 +1,7 @@
 "use client"; // Add this line at the top to mark this file as a Client Component
 
 import React, { useEffect, useState } from "react";
-import { User } from "lucide-react";
+import { Bot } from "lucide-react";
 import { BioGenerator } from "./components/BioGenerator";
 import Image from "next/image";
 
@@ -46,17 +46,16 @@ const Page = () => {
             website, or portfolio
           </p>
 
-          <div className="flex flex-col items-center space-y-6">
-            <div className="-mt-2 flex items-center gap-2 px-4 py-1 rounded-full bg-purple-200 dark:bg-purple-900/30">
-              {/* <User className="w-3 h-3 text-purple-900 dark:text-purple-300 animate-pulse" /> */}
-              <span className="text-sm  antialiased">Powered by</span>
-              <div className="mt-1 flex items-center justify-center gap-2 opacity-0 animate-slide-up">
+          <div className="flex flex-col items-center space-y-5">
+            <span className="text-sm  antialiased">Powered by</span>
+            <div className="mt-1 flex items-center justify-center gap-3 opacity-0 animate-slide-up">
+              <div className="-mt-2 flex items-center gap-3 px-4 py-1 rounded-full bg-purple-200 dark:bg-purple-900/30">
                 <div className="flex items-center justify-center">
                   <Image
-                    src="/assets/img/meta.png"
+                    src="/assets/img/llama.png"
                     alt="Meta"
-                    width={60}
-                    height={60}
+                    width={80}
+                    height={0}
                     className="object-contain  transition-transform duration-300"
                   />
                 </div>
@@ -65,7 +64,7 @@ const Page = () => {
                   <Image
                     src="/assets/img/mistral.svg"
                     alt="Mistral"
-                    width={50}
+                    width={80}
                     height={50}
                     className="object-contain  transition-transform duration-300"
                   />
@@ -75,7 +74,7 @@ const Page = () => {
                   <Image
                     src="/assets/img/cloudflare.png"
                     alt="Cloudflare"
-                    width={70}
+                    width={80}
                     height={70}
                     className="object-contain  transition-transform duration-300"
                   />
@@ -94,7 +93,7 @@ const Page = () => {
         <div className="container max-w-4xl mx-auto text-center">
           <hr className="border-gray-300 dark:border-gray-700 mb-4" />
           <p className="text-sm text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-300 transition-colors duration-300">
-            Crafted with love by{" "}
+            Crafted with ❤️ by{" "}
             <span className="font-semibold">Aldo Tobing</span>
           </p>
         </div>

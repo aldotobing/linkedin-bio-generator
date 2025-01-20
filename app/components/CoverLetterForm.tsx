@@ -181,7 +181,8 @@ Do not include the applicant's name, date, or closing remarks. Focus on:
 
       const data = await response.json();
       const letterContent =
-        data.response || "Failed to create the cover letter. Please try again.";
+        data.response?.trim() ||
+        "Failed to create the cover letter. Please try again.";
       const letterContentWithBreaks = letterContent.replace(/\n/g, "<br />");
 
       const formattedLetter = `
