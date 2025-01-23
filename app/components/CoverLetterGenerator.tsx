@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -40,18 +40,33 @@ export function CoverLetterGenerator({
   const [copied, setCopied] = useState(false);
   const [formState, setFormState] = useState<any>(null); // Store form state here
 
+  const generatedCoverLetterRef = useRef<HTMLDivElement>(null);
+
   const handleGeneration = async (coverLetter: string) => {
     setIsGenerating(true);
     setGeneratedCoverLetter("");
 
-    // Simulate typing effect
     for (let i = 0; i < coverLetter.length; i++) {
-      setGeneratedCoverLetter((prev) => prev + coverLetter[i]);
-      await new Promise((resolve) => setTimeout(resolve, 10));
+      setGeneratedCoverLetter((prev) => {
+        const newCoverLetter = prev + coverLetter[i];
+        return newCoverLetter;
+      });
+      await new Promise((resolve) => setTimeout(resolve, 1)); // Faster typing effect
+      if (generatedCoverLetterRef.current) {
+        generatedCoverLetterRef.current.scrollTop =
+          generatedCoverLetterRef.current.scrollHeight;
+      }
     }
 
     setIsGenerating(false);
   };
+
+  useEffect(() => {
+    if (generatedCoverLetterRef.current) {
+      generatedCoverLetterRef.current.scrollTop =
+        generatedCoverLetterRef.current.scrollHeight;
+    }
+  }, [generatedCoverLetter]);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(
@@ -99,7 +114,7 @@ export function CoverLetterGenerator({
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-violet-50 to-white shadow-xl">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-violet-700 flex items-center gap-2">
-              <Building2 className="animate-bounce" size={24} />
+              <Building2 className="animate-in" size={24} />
               Professional Cover Letter Generator
             </DialogTitle>
             <DialogDescription className="text-gray-600">
@@ -124,6 +139,7 @@ export function CoverLetterGenerator({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 className="mt-6 space-y-4"
+                ref={generatedCoverLetterRef}
               >
                 <Label className="text-xl font-semibold text-green-700 flex items-center gap-2">
                   Your Professional Cover Letter

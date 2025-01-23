@@ -10,6 +10,7 @@ import {
   Lightbulb,
   Star,
   Globe,
+  Crown,
 } from "lucide-react";
 
 export const vibeOptions = [
@@ -45,7 +46,7 @@ export const vibeOptions = [
   {
     name: "Leadership",
     description: "Emphasizes vision and team management experience",
-    icon: <Users className="w-6 h-6 text-indigo-700" />,
+    icon: <Crown className="w-6 h-6 text-indigo-700" />,
   },
   {
     name: "Analytical",
