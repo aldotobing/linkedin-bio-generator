@@ -34,7 +34,6 @@ const Page = () => {
           ))}
         </div>
       )}
-
       <div className="container max-w-4xl mx-auto px-4 py-8 relative">
         <div className="mt-5 text-center mb-12 opacity-0 animate-fade-in">
           <h1 className="text-2xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-4 hover:scale-105 transition-transform duration-300">
@@ -70,12 +69,12 @@ const Page = () => {
                   />
                 </div>
 
-                <div className="-mt-1 -ml-1.5 flex items-center justify-center">
+                <div className="-mt-0 -ml-1.5 flex items-center justify-center">
                   <Image
                     src="/assets/img/cloudflare.png"
                     alt="Cloudflare"
-                    width={80}
-                    height={70}
+                    width={90}
+                    height={80}
                     className="object-contain  transition-transform duration-300"
                   />
                 </div>
@@ -88,7 +87,6 @@ const Page = () => {
           <BioGenerator />
         </div>
       </div>
-
       <footer className="bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-800 py-4 mt-12">
         <div className="container max-w-4xl mx-auto text-center">
           <hr className="border-gray-300 dark:border-gray-700 mb-4" />
@@ -96,6 +94,32 @@ const Page = () => {
             Crafted with ❤️ by{" "}
             <span className="font-semibold">Aldo Tobing</span>
           </p>
+          <div className="flex justify-center items-center mt-2">
+            <a
+              href="https://github.com/aldotobing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-2"
+            >
+              <img
+                src="/assets/img/github-mark.png"
+                alt="GitHub"
+                className="h-4 w-4 hover:opacity-80 transition-opacity duration-300"
+              />
+            </a>
+            <a
+              href="https://twitter.com/aldo_tobing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-2"
+            >
+              <img
+                src="/assets/img/x.png"
+                alt="Twitter"
+                className="h-3.5 w-4 hover:opacity-80 transition-opacity duration-300"
+              />
+            </a>
+          </div>
         </div>
       </footer>
     </div>
