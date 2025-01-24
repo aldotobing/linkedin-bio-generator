@@ -175,7 +175,7 @@ Keep the response brief, impactful, and clear, and ensure it is ready for use wi
             }}
           >
             <h3 className="text-lg font-semibold text-red-500">Oops</h3>
-            <p className="text-sm text-gray-800 mt-2">
+            <p className="text-sm text-gray-800 mt-2 antialiased">
               Please select your role before generating the example.
             </p>
             <div className="mt-6 flex justify-end">
