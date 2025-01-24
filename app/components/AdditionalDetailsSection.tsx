@@ -167,23 +167,23 @@ Keep the response brief, impactful, and clear, and ensure it is ready for use wi
 
       {/* Modal Dialog with Smooth iOS-like Paralax Effect */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50">
           <div
-            className="bg-white p-4 rounded-lg shadow-lg max-w-sm w-full transition-all transform scale-110 ease-out duration-700 opacity-0 animate-fadeIn"
+            className="bg-white bg-opacity-90 p-6 rounded-xl shadow-xl max-w-md w-full transition-transform transform scale-95 ease-out duration-500 opacity-0 animate-fadeIn"
             style={{
-              animation: "fadeIn 0.7s ease-out forwards",
+              animation: "fadeIn 0.5s ease-out forwards",
             }}
           >
-            <h3 className="text-md font-semibold text-red-600">Attention</h3>
-            <p className="text-sm text-gray-900 antialiased">
+            <h3 className="text-lg font-semibold text-red-500">Oops</h3>
+            <p className="text-sm text-gray-800 mt-2">
               Please select your role before generating the example.
             </p>
-            <div className="mt-4 flex justify-end">
+            <div className="mt-6 flex justify-end">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleCloseModal}
-                className="text-gray-600 border-gray-300 hover:bg-gray-100"
+                className="text-gray-600 border-gray-300 hover:bg-gray-100 hover:text-gray-800"
               >
                 Close
               </Button>
