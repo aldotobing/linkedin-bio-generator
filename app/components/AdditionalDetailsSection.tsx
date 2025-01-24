@@ -159,7 +159,8 @@ Keep the response brief, impactful, and clear, and ensure it is ready for use wi
         onChange={(e) => setAdditionalContext(e.target.value)}
         className="border-2 border-indigo-300 focus:ring-4 focus:ring-indigo-200 min-h-[100px] focus:border-transparent text-sm sm:text-base"
       />
-      <p className="text-xs text-gray-600 mt-2 antialiased">
+      <p className="text-[10px] text-gray-600 mt-2 antialiased">
+        <span className="mr-1">ℹ</span>
         You can click the "<b>Get Example</b>" button to generate a template,
         which you can customize as needed.
       </p>
