@@ -4,10 +4,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <link
-          rel="icon"
-          href="https://aldotobing.github.io/assets/img/favicon.png"
-        />
+        <link rel="icon" href="/public/favicon.ico" />
 
         <meta
           name="description"
