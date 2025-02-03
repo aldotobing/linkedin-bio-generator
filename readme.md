@@ -1,6 +1,6 @@
 # LinkedIn Bio Generator
 
-This project is a LinkedIn Bio Generator built with Next.js and TypeScript. It allows users to generate compelling LinkedIn bios based on their role, vibe, and additional context.
+This project is an AI-powered Bio & Cover Letter Generator built with Next.js and TypeScript. It allows users to generate compelling bios and cover letters based on their role, vibe, and additional context using AI.
 
 ## Features
 
