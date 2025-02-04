@@ -13,36 +13,42 @@ export async function fetchGeneratedBio({
 }) {
   const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL || "";
 
-  const prompt = `Create a compelling LinkedIn bio for a ${role}.
+  const prompt = `Generate a compelling LinkedIn bio for a ${role} role that showcases a professional's unique value, 
+  expertise, and achievements in a way that captures attention and builds credibility.
 ${additionalContext ? `Additional Context: ${additionalContext}` : ""}
 
 Follow these guidelines:
 1. Style: Make it engaging, and authentic with ${vibe} vibe.
 
 2. Structure:
-   - Hook: Start with an attention-grabbing opener that defines your professional identity
-   - Impact: Highlight 2-3 specific achievements and kind of problems you solve and for whom with what results and methods
-   - Expertise: Mention your core technical skills and specializations
-   - Value: Describe your unique approach or methodology that sets you apart
-   - Vision: End with a clear purpose or call to action
+   - Hook: Start with a powerful opener that defines your professional identity in a captivating way.
+   - Impact: Highlight 1-2 specific achievements, showcasing the kind of problems you solve, for whom, and the tangible results you’ve delivered.
+   - Expertise: Clearly outline your core technical skills, specializations, and industry focus.
+   - Value Proposition: Describe what makes you unique—your approach, methodology, or perspective that differentiates you from others.
+   - Vision & CTA: Conclude with a strong statement about your professional purpose, mission, or an engaging call to action.
 
 3. Must Include:
-   - At least one quantifiable achievement
-   - Current role focus and expertise level
-   - Key technical skills relevant to ${role}
-   - Professional passion or driving motivation
+   - At least one quantifiable achievement.
+   - Clear mention of current role, focus, and expertise level.
+   - Key technical skills and specializations relevant to ${role} role.
+   - A touch of professional passion or motivation that drives your work
 
-4. Format:
+4. Tone & Style:
+    -Engaging and authentic (avoid generic corporate jargon).
+    -Clear and concise (no fluff, every sentence adds value).
+    -Optional: A touch of personality to make it memorable
+
+5. Format:
    - Length: 2-3 concise paragraphs (300-400 characters)
    - Tone: Confident but approachable
    - Voice: First-person narrative
    ${
      language === "id"
-       ? "Make it in Indonesian language (in Profesional manner) and verify with Kamus Besar Bahasa Indonesia"
+       ? "Tulis dalam bahasa Indonesia dengan gaya profesional yang alami. Gunakan bahasa yang umum ditemukan di profil LinkedIn: jelas, profesional, dan tidak terlalu kaku. Pastikan ejaan dan tata bahasa sesuai KBBI, tetapi tetap mudah dibaca dan menarik. Jangan menerjemahkan nama profesi/role serta istilah teknis yang sudah umum digunakan dalam bahasa Inggris."
        : ""
    }
 
-5. Avoid:
+6. Avoid:
    - Generic buzzwords and clichés
    - Personal information unrelated to career
    - Overly formal or casual language
