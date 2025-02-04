@@ -38,7 +38,7 @@ Follow these guidelines:
    - Voice: First-person narrative
    ${
      language === "id"
-       ? "Make it in Professional Indonesian language (Bahasa baku) and verify with Kamus Besar Bahasa Indonesia"
+       ? "Make it in Indonesian language (in Profesional manner) and verify with Kamus Besar Bahasa Indonesia"
        : ""
    }
 
